@@ -2,23 +2,27 @@
 //CALCULADORES
 //CALCULAR EL PROCENTAJE DEL INTERES
 function calcularPorcentajeInteres(cuotas){
-    let porcentajeInteres = cuotas * 0.02
-    return porcentajeInteres
+    let porcentajeInteres = cuotas * 0.02;
+    return porcentajeInteres;
 };
 //CALCULAR EL INTERES
 function calcularInteres(monto, porcentajeInteres){
-    let interes = monto * porcentajeInteres
-    return interes
+    let interes = monto * porcentajeInteres;
+    return interes;
 };
 //CALCULAR EL PAGO MENSUAL
 function calcularPagoMensual(monto, cuotas){
-    let pagoMensual = monto/cuotas
-    return pagoMensual
+    let pagoMensual = monto/cuotas;
+    return pagoMensual;
 };
 
 
 //CONTRUCTOR OBJETOS PRESTAMOS
 function constructorPrestamo(montoSolicitado, cuotas){
+    
+    let tamanioHistorial = historial.length
+    
+    this.id = tamanioHistorial + 1
     this.monto = montoSolicitado
     this.cuotas = cuotas
     this.interes = calcularInteres(montoSolicitado, calcularPorcentajeInteres(cuotas))
@@ -26,78 +30,82 @@ function constructorPrestamo(montoSolicitado, cuotas){
     this.pagoMensual = calcularPagoMensual(this.total, cuotas)
 };
 
-//CREAR UN PRESTAMO
-function crearPrestamo(){
-    
-    let monto;
-    let cuotas;
 
-    do{
-        monto = parseFloat(prompt("Coloque el monto que quiera pedir"));
-
-        if( isNaN(monto) || monto <= 0){
-            alert("Por favor elija un numero valido");
-        };
-    }while( isNaN(monto) || monto <= 0);
-    do{
-        cuotas = parseInt(prompt("Coloque en cuantas cuotas quieres pagar /maximo 12 cuotas/"));
-
-        if(isNaN(cuotas) || cuotas > 12 || cuotas <= 0){
-            alert("Por favor elija un numero valido")
-        };
-    }while(isNaN(cuotas) || cuotas > 12 || cuotas <= 0);
-
-
-    let prestamo = new constructorPrestamo(monto, cuotas);
-    
-    historial.push(prestamo);
-
-    console.log(".")
-
-    console.log("Usted solicito: ", prestamo.monto);
-    console.log("Cantidad de cuotas: ", prestamo.cuotas);
-    console.log("Intereses: ", prestamo.interes);
-    console.log("Total a pagar: ", prestamo.total);
-    console.log("Debera pagar por mes: ", prestamo.pagoMensual);
-
-    console.log(".")
-
-    console.log("Si desea crear otro prestamo escriba: crearPrestamo()")
-    console.log("Si desea revisar su historial de prestamos escriba: mostrarHistorial(historial)")
+//GENEREADOR HTML
+function prestamoHTML(prestamo){
+    let resultadoImprimir = `
+    <li>
+        <h3>prestamo: <strong>${prestamo.id}</strong></h3>
+        <p>monto solicitado: ${prestamo.monto}</p>
+        <p>cuotas: ${prestamo.cuotas}</p>
+        <p>inters: ${prestamo.interes}</p>
+        <p>total a pagar: ${prestamo.total}</p>
+        <p>pago mensual: ${prestamo.pagoMensual}</p>
+    </li>`;
+    return resultadoImprimir;
 };
 
 //MOSTRAR HISTORIAL
 function mostrarHistorial (){
 
-    let tamanioHistorial = historial.length;
-
-    for(i = 0; i < tamanioHistorial; i++ ){
-        console.log(".")
-        console.log("Prestamo ", i + 1)
-        console.log("Usted solicito: ", historial[i].monto);
-        console.log("Cantidad de cuotas: ", historial[i].cuotas);
-        console.log("Intereses: ", historial[i].interes);
-        console.log("Total a pagar: ", historial[i].total);
-        console.log("Debera pagar por mes: ", historial[i].pagoMensual);
-        console.log(".")
-    };
-
-};
-
-function eliminarHistorial(){
-    
+    let prestamoHTMLcompleto = "<h2>Historial</h2>";
     let tamanioHistorial = historial.length
 
+    for(i = 0; i < tamanioHistorial; i++ ){
+        prestamoHTMLcompleto += prestamoHTML(historial[i]);
+    };
+    resultado.innerHTML = prestamoHTMLcompleto;
+};
+
+//ELIMINAR HISTORAL
+function eliminarHistorial(){
+
+    let tamanioHistorial = historial.length;
+
     if(tamanioHistorial > 0){
-        console.log("El historial se borro con exito")
-        historial = []
+        resultado.innerHTML("El historial se borro con exito");
+        historial = [];
     }else{
-        console.log("No se encontro ningun elemento para borrar")
-    }  
-}
+        resultado.innerHTML("No se encontro ningun elemento para borrar");
+    };
+};
 
-let historial = []
+//REINICIAR TEXTO
+function eliminarTexto(texto){
+    texto.innerHTML = ``
+};
+
+//CREAR UN PRESTAMO
+function crearPrestamo(){
+    
+    let prestamo;
+    let monto = document.getElementById("monto");
+    let cuotas = document.getElementById("cuotas");
+    
+    monto = parseFloat(monto.value);
+    cuotas = parseFloat(cuotas.value);
+    
+    //comprueba si el monto es valido
+    if( isNaN(monto) || monto <= 0){
+        resultado.innerHTML = `<p>Por favor elija un monto valido</p>`;
+        return;
+    };
+
+    //comprueba si las cuoatas son validas
+    if(isNaN(cuotas) || cuotas > 12 || cuotas <= 0){
+        resultado.innerHTML = `<p>Por favor elija un numero valido</p>`;
+        return;
+    };
 
 
-console.log("Bienvenido/a al sistema")
-console.log("Si desea solicitar su prestamo escriba: crearPrestamo()")
+    prestamo = new constructorPrestamo(monto, cuotas);
+    
+    historial.push(prestamo);
+
+    resultado.innerHTML = prestamoHTML(prestamo);
+    
+};
+
+let historial = [];
+
+let resultado = document.getElementById("resultado");

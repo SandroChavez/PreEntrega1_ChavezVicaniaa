@@ -7,6 +7,21 @@
     <title>Document</title>
 </head>
 <body>
+    
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; gap: 6px;">
+            <input type="text" placeholder="Monto" id="monto">
+            <input type="text" placeholder="Cuotas" id="cuotas">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button id="crearPrestamo" onclick="crearPrestamo(monto,cuotas)">Crear Prestamo</button>
+            <button id="eliminarHistorial" onclick="eliminarHistorial()">Eliminar Historial</button>
+            <button id="mostrarHistorial" onclick="mostrarHistorial()">Mostrar Historial</button>
+            <button id="eliminarTexto" onclick="eliminarTexto(resultado)">Eliminar Tesxto</button>
+        </div>
+    </div>
+    <ul id="resultado"></ul>
+
     <script src="script.js"></script>
 </body>
 </html>
