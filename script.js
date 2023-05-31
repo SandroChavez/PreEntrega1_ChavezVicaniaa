@@ -38,7 +38,7 @@ function prestamoHTML(prestamo){
         <h3>prestamo: <strong>${prestamo.id}</strong></h3>
         <p>monto solicitado: ${prestamo.monto}</p>
         <p>cuotas: ${prestamo.cuotas}</p>
-        <p>inters: ${prestamo.interes}</p>
+        <p>interes: ${prestamo.interes}</p>
         <p>total a pagar: ${prestamo.total}</p>
         <p>pago mensual: ${prestamo.pagoMensual}</p>
     </li>`;
@@ -48,8 +48,15 @@ function prestamoHTML(prestamo){
 //MOSTRAR HISTORIAL
 function mostrarHistorial (){
 
-    let prestamoHTMLcompleto = "<h2>Historial</h2>";
-    let tamanioHistorial = historial.length
+    let tamanioHistorial = historial.length;
+    let prestamoHTMLcompleto
+
+    if(tamanioHistorial == 0){
+        resultado.innerHTML = "<h3>El historial esta vacio</h3>"
+        return;
+    };
+    prestamoHTMLcompleto = "<h2>Historial</h2>";
+    
 
     for(i = 0; i < tamanioHistorial; i++ ){
         prestamoHTMLcompleto += prestamoHTML(historial[i]);
@@ -63,10 +70,11 @@ function eliminarHistorial(){
     let tamanioHistorial = historial.length;
 
     if(tamanioHistorial > 0){
-        resultado.innerHTML("El historial se borro con exito");
+        resultado.innerHTML = "<h3>El historial se borro con exito</h3>";
         historial = [];
+        return;
     }else{
-        resultado.innerHTML("No se encontro ningun elemento para borrar");
+        resultado.innerHTML = "<h3>No se encontro ningun elemento para borrar</h3>";
     };
 };
 
