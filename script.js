@@ -1,3 +1,8 @@
+//ESTILOS
+let estiloH3 = "h3";
+let estiloH2 = "h2";
+
+
 
 //CALCULADORES
 //CALCULAR EL PROCENTAJE DEL INTERES
@@ -13,6 +18,7 @@ function calcularInteres(monto, porcentajeInteres){
 //CALCULAR EL PAGO MENSUAL
 function calcularPagoMensual(monto, cuotas){
     let pagoMensual = monto/cuotas;
+    pagoMensual = Math.round(pagoMensual)
     return pagoMensual;
 };
 
@@ -34,14 +40,14 @@ function constructorPrestamo(montoSolicitado, cuotas){
 //GENEREADOR HTML
 function prestamoHTML(prestamo){
     let resultadoImprimir = `
-    <li>
-        <h3>prestamo: <strong>${prestamo.id}</strong></h3>
-        <p>monto solicitado: ${prestamo.monto}</p>
-        <p>cuotas: ${prestamo.cuotas}</p>
-        <p>interes: ${prestamo.interes}</p>
-        <p>total a pagar: ${prestamo.total}</p>
-        <p>pago mensual: ${prestamo.pagoMensual}</p>
-    </li>`;
+    <div class="card-prestamo">
+        <h3 class=${estiloH3}>prestamo: <strong>${prestamo.id}</strong></h3>
+        <div>monto solicitado: ${prestamo.monto}</div>
+        <div>cuotas: ${prestamo.cuotas}</div>
+        <div>interes: ${prestamo.interes}</div>
+        <div>total a pagar: ${prestamo.total}</div>
+        <div>pago mensual: ${prestamo.pagoMensual}</div>
+    </div>`;
     return resultadoImprimir;
 };
 
@@ -49,38 +55,38 @@ function prestamoHTML(prestamo){
 function mostrarHistorial (){
 
     let tamanioHistorial = historial.length;
-    let prestamoHTMLcompleto
+    let prestamoHTMLcompleto;
 
     if(tamanioHistorial == 0){
-        resultado.innerHTML = "<h3>El historial esta vacio</h3>"
+        resultado.innerHTML = `<h2 class=${estiloH2}>El historial esta vacio</h2>`;
         return;
     };
-    prestamoHTMLcompleto = "<h2>Historial</h2>";
+    prestamoHTMLcompleto = `<h2 class=${estiloH2}>Historial</h2>`;
     
 
-    for(i = 0; i < tamanioHistorial; i++ ){
-        prestamoHTMLcompleto += prestamoHTML(historial[i]);
+    for(elementoHistorial of historial){
+        prestamoHTMLcompleto += prestamoHTML(elementoHistorial);
     };
     resultado.innerHTML = prestamoHTMLcompleto;
 };
 
 //ELIMINAR HISTORAL
-function eliminarHistorial(){
+function eliminarHistorial(texto){
 
     let tamanioHistorial = historial.length;
 
     if(tamanioHistorial > 0){
-        resultado.innerHTML = "<h3>El historial se borro con exito</h3>";
+        resultado.innerHTML = `<h2 class=${estiloH2}>El historial se borro con exito</h2>`;
         historial = [];
         return;
     }else{
-        resultado.innerHTML = "<h3>No se encontro ningun elemento para borrar</h3>";
+        texto.innerHTML = `<h2 class=${estiloH2}>No se encontro ningun elemento para borrar</h2>`;
     };
 };
 
 //REINICIAR TEXTO
 function eliminarTexto(texto){
-    texto.innerHTML = ``
+    texto.innerHTML = `<h2 class=${estiloH2}><strong>Se elimino el texto</h2>`
 };
 
 //CREAR UN PRESTAMO
@@ -95,13 +101,13 @@ function crearPrestamo(){
     
     //comprueba si el monto es valido
     if( isNaN(monto) || monto <= 0){
-        resultado.innerHTML = `<p>Por favor elija un monto valido</p>`;
+        resultado.innerHTML = `<h2 class=${estiloH2}><strong>Por favor elija un monto valido</strong></h2>`;
         return;
     };
 
     //comprueba si las cuoatas son validas
     if(isNaN(cuotas) || cuotas > 12 || cuotas <= 0){
-        resultado.innerHTML = `<p>Por favor elija un numero valido</p>`;
+        resultado.innerHTML = `<h2 class=${estiloH2}><strong>Por favor elija un numero de cuotas valido(max. 12)</strong></h2>`;
         return;
     };
 
@@ -113,7 +119,6 @@ function crearPrestamo(){
     resultado.innerHTML = prestamoHTML(prestamo);
     
 };
-
 let historial = [];
 
 let resultado = document.getElementById("resultado");

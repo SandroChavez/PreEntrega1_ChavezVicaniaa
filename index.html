@@ -2,25 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    
+    <link rel="stylesheet" href="estilos/styleprueba.css">
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@800&display=swap" rel="stylesheet">
+
+    <title>PrestaFast || El sitio mas rapido de prestamos online</title>
 </head>
 <body>
     
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-        <div style="display: flex; gap: 6px;">
-            <input type="text" placeholder="Monto" id="monto">
-            <input type="text" placeholder="Cuotas" id="cuotas">
-        </div>
-        <div style="display: flex; gap: 10px;">
-            <button onclick="crearPrestamo(monto,cuotas)">Crear Prestamo</button>
-            <button onclick="eliminarHistorial()">Eliminar Historial</button>
-            <button onclick="mostrarHistorial()">Mostrar Historial</button>
-            <button onclick="eliminarTexto(resultado)">Eliminar Tesxto</button>
+    <!-- Caja Principal-->
+    <div class="contenedor-principal">
+        
+        
+        <!-- Titulo -->
+        <h1 class="h1">PrestaFast</h1>
+
+        <!-- Contenedor -->
+        <div class="contenedor contenedor-1">
+            <!-- Caja Inputs -->
+            <div class="contenedor-inputs">
+                <!-- Input Monto -->
+                <div>
+                    <input type="text" placeholder="Ingrese el monto" id="monto">
+                </div>
+
+                <!-- Input Cuotas -->
+                <div>
+                    <input type="text" placeholder="Cuotas (max:12)" id="cuotas">
+                </div>
+            </div>
+
+            <!-- Caja Botones -->
+            <div class="contenedor-botones">
+
+                <!-- Boton Crear Prestamo -->
+                <div class="boton">
+                    <button onclick="crearPrestamo(monto,cuotas)">Crear Prestamo</button>
+                </div>
+
+                <!-- Boton Mostrar Historial -->
+                <div class="boton">
+                    <button onclick="mostrarHistorial()">Mostrar Historial</button>
+                </div>
+
+                <!-- Boton Eliminar Texto -->
+                <div class="boton">
+                    <button onclick="eliminarHistorial(resultado)">Eliminar Historial</button>
+                </div>
+
+                <!-- Boton Eliminar Historial -->
+                <div class="boton">
+                    <button onclick="eliminarTexto(resultado)">Eliminar Tesxto</button>
+                </div>
+
+            </div>
         </div>
     </div>
-    <ul id="resultado"></ul>
+    <div class="contenedor-principal">
+        <!-- Caja Resultado -->
+        <div class="contenedor resultado" id="resultado">
+            <h3 class="h2 centrar">Aqui se mostrara los resultados</h3>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

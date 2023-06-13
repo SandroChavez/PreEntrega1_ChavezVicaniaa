@@ -1,0 +1,40 @@
+$color-negro:rgb(42, 42, 42);
+.contenedor{
+    display: grid;
+
+    gap: 15px;
+
+    background-color: $color-blanco;
+
+    border-radius: 10px;
+
+    padding: 20px;
+}
+.h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    grid-column: 1/4;
+
+    font-size: 1.8rem;
+
+    transition: all 0.4s;
+    &:hover{
+        font-size: 1.9rem;
+    }
+}
+.h3{
+    font-size: 1.2rem;
+
+    transition: all 0.4s;
+    &:hover{
+        font-size: 1.3rem;
+    }
+}
+.card-prestamo{
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
