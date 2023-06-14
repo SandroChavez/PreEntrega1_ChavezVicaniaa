@@ -17,24 +17,32 @@ $color-negro:rgb(42, 42, 42);
 
     grid-column: 1/4;
 
-    font-size: 1.8rem;
+    font-size: 2rem;
 
     transition: all 0.4s;
     &:hover{
-        font-size: 1.9rem;
+        font-size: 2.2rem;
     }
 }
 .h3{
-    font-size: 1.2rem;
+    padding: 10px 0;
+
+    font-size: 1.4rem;
 
     transition: all 0.4s;
     &:hover{
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 }
 .card-prestamo{
     display: flex;
     flex-direction: column;
 
-    gap: 6px;
+    gap: 7px;
+    div{
+        transition: all 0.2s;
+        &:hover{
+            font-size: 100% + 8%;
+        }
+    }
 }

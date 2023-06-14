@@ -1,9 +1,3 @@
-//ESTILOS
-let estiloH3 = "h3";
-let estiloH2 = "h2";
-
-
-
 //CALCULADORES
 //CALCULAR EL PROCENTAJE DEL INTERES
 function calcularPorcentajeInteres(cuotas){
@@ -26,14 +20,14 @@ function calcularPagoMensual(monto, cuotas){
 //CONTRUCTOR OBJETOS PRESTAMOS
 function constructorPrestamo(montoSolicitado, cuotas){
     
-    let tamanioHistorial = historial.length
+    let tamanioHistorial = historial.length;
     
-    this.id = tamanioHistorial + 1
-    this.monto = montoSolicitado
-    this.cuotas = cuotas
-    this.interes = calcularInteres(montoSolicitado, calcularPorcentajeInteres(cuotas))
-    this.total = this.monto + this.interes
-    this.pagoMensual = calcularPagoMensual(this.total, cuotas)
+    this.id = tamanioHistorial + 1;
+    this.monto = montoSolicitado;
+    this.cuotas = cuotas;
+    this.interes = Math.round(calcularInteres(montoSolicitado, calcularPorcentajeInteres(cuotas)));
+    this.total = this.monto + this.interes;
+    this.pagoMensual = calcularPagoMensual(this.total, cuotas);
 };
 
 
@@ -86,7 +80,7 @@ function eliminarHistorial(texto){
 
 //REINICIAR TEXTO
 function eliminarTexto(texto){
-    texto.innerHTML = `<h2 class=${estiloH2}><strong>Se elimino el texto</h2>`
+    texto.innerHTML = `<h2 class=${estiloH2}><strong>Se elimino el texto</strong></h2>`
 };
 
 //CREAR UN PRESTAMO
@@ -122,3 +116,7 @@ function crearPrestamo(){
 let historial = [];
 
 let resultado = document.getElementById("resultado");
+
+//ESTILOS
+let estiloH3 = "h3";
+let estiloH2 = "h2";

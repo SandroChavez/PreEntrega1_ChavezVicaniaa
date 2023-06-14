@@ -1,6 +1,7 @@
 $color-negro:rgb(42, 42, 42);
 $color-blanco:rgb(239, 239, 239);
 $color-principal:rgb(125, 222, 226);
+$color-amarillo: rgb(255, 255, 193);
 
 *{
     padding: 0;
@@ -17,12 +18,12 @@ html{
     justify-content: center;
     align-items: center;
 
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: $color-blanco;
 
     transition: all 0.4s;
     &:hover{
-        font-size: 2.7rem;
+        font-size: 3rem;
         color: $color-principal;
     }
 }
@@ -49,6 +50,19 @@ html{
 
             justify-content: space-around;
             align-items: center;
+            div{
+                input{
+                    font-size: 15px;
+
+                    border-radius: 5px;
+                    border: 2px solid $color-negro;
+
+                    transition: all 0.2s;
+                    &:focus{
+                        background-color: $color-amarillo;
+                    }
+                }
+            }
         }
         .contenedor-botones{
             display: grid;
