@@ -79,7 +79,7 @@ html {
   grid-template-rows: auto;
   width: 60%;
   height: auto;
-  gap: 10px;
+  gap: 15px;
 }
 
 .contenedor {
@@ -102,23 +102,25 @@ html {
   font-size: 2.2rem;
 }
 
-.h3 {
-  padding: 10px 0;
-  font-size: 1.4rem;
-  transition: all 0.4s;
-}
-.h3:hover {
-  font-size: 1.5rem;
-}
-
 .card-prestamo {
   display: flex;
   flex-direction: column;
   gap: 7px;
 }
 .card-prestamo div {
+  display: flex;
+}
+.card-prestamo div p {
   transition: all 0.2s;
 }
-.card-prestamo div:hover {
+.card-prestamo div p:hover {
   font-size: 108%;
+}
+.card-prestamo div .h3 {
+  padding: 10px 0;
+  font-size: 1.4rem;
+  transition: all 0.2s;
+}
+.card-prestamo div .h3:hover {
+  font-size: 1.5rem;
 }/*# sourceMappingURL=style.css.map */

@@ -35,12 +35,12 @@ function constructorPrestamo(montoSolicitado, cuotas){
 function prestamoHTML(prestamo){
     let resultadoImprimir = `
     <div class="card-prestamo">
-        <h3 class=${estiloH3}>prestamo: <strong>${prestamo.id}</strong></h3>
-        <div>monto solicitado: ${prestamo.monto}</div>
-        <div>cuotas: ${prestamo.cuotas}</div>
-        <div>interes: ${prestamo.interes}</div>
-        <div>total a pagar: ${prestamo.total}</div>
-        <div>pago mensual: ${prestamo.pagoMensual}</div>
+        <div><h3 class=${estiloH3}>prestamo: <strong>${prestamo.id}</strong></h3></div>
+        <div><p>monto solicitado: ${prestamo.monto}</p></div>
+        <div><p>cuotas: ${prestamo.cuotas}</p></div>
+        <div><p>interes: ${prestamo.interes}</p></div>
+        <div><p>total a pagar: ${prestamo.total}</p></div>
+        <div><p>pago mensual: ${prestamo.pagoMensual}</p></div>
     </div>`;
     return resultadoImprimir;
 };
