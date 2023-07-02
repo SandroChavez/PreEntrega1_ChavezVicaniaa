@@ -1,49 +1,22 @@
 //CALCULADORES
 //CALCULAR EL PROCENTAJE DEL INTERES
-function calcularPorcentajeInteres(cuotas){
-    let porcentajeInteres = cuotas * 0.02;
-    return porcentajeInteres;
-};
+const calcularPorcentajeInteres = (cuotas) => cuotas * 0.02;
+
 //CALCULAR EL INTERES
-function calcularInteres(monto, porcentajeInteres){
-    let interes = monto * porcentajeInteres;
-    return interes;
-};
+const calcularInteres = (monto,porcentajeIntereses) => Math.round(monto * porcentajeIntereses);
+
 //CALCULAR EL PAGO MENSUAL
-function calcularPagoMensual(monto, cuotas){
-    let pagoMensual = monto/cuotas;
-    pagoMensual = Math.round(pagoMensual)
-    return pagoMensual;
-};
+const calcularPagoMensual = (monto,cuotas) => Math.round(monto/cuotas);
+
+// - - - - - - - -
+
+//GUARDAR LOCAL STORE
+const GuardarHistorialLocalStore = () => localStorage.setItem("historial", JSON.stringify(historial));
 
 
-//CONTRUCTOR OBJETOS PRESTAMOS
-function constructorPrestamo(montoSolicitado, cuotas){
-    
-    let tamanioHistorial = historial.length;
-    
-    this.id = tamanioHistorial + 1;
-    this.monto = montoSolicitado;
-    this.cuotas = cuotas;
-    this.interes = Math.round(calcularInteres(montoSolicitado, calcularPorcentajeInteres(cuotas)));
-    this.total = this.monto + this.interes;
-    this.pagoMensual = calcularPagoMensual(this.total, cuotas);
-};
+//REINICIAR TEXTO
+const eliminarTexto = (texto) => texto.innerHTML = `<h2 class=${estiloH2}><strong>Se elimino el texto</strong></h2>`;
 
-
-//GENEREADOR HTML
-function prestamoHTML(prestamo){
-    let resultadoImprimir = `
-    <div class="card-prestamo">
-        <div><h3 class=${estiloH3}>prestamo: <strong>${prestamo.id}</strong></h3></div>
-        <div><p>monto solicitado: ${prestamo.monto}</p></div>
-        <div><p>cuotas: ${prestamo.cuotas}</p></div>
-        <div><p>interes: ${prestamo.interes}</p></div>
-        <div><p>total a pagar: ${prestamo.total}</p></div>
-        <div><p>pago mensual: ${prestamo.pagoMensual}</p></div>
-    </div>`;
-    return resultadoImprimir;
-};
 
 //MOSTRAR HISTORIAL
 function mostrarHistorial (){
@@ -64,24 +37,51 @@ function mostrarHistorial (){
     resultado.innerHTML = prestamoHTMLcompleto;
 };
 
+
 //ELIMINAR HISTORAL
-function eliminarHistorial(texto){
+function eliminarHistorial(){
 
     let tamanioHistorial = historial.length;
 
     if(tamanioHistorial > 0){
         resultado.innerHTML = `<h2 class=${estiloH2}>El historial se borro con exito</h2>`;
         historial = [];
-        return;
     }else{
-        texto.innerHTML = `<h2 class=${estiloH2}>No se encontro ningun elemento para borrar</h2>`;
+        resultado.innerHTML = `<h2 class=${estiloH2}>No se encontro ningun elemento para borrar</h2>`;
     };
+
+    localStorage.removeItem("historial")
 };
 
-//REINICIAR TEXTO
-function eliminarTexto(texto){
-    texto.innerHTML = `<h2 class=${estiloH2}><strong>Se elimino el texto</strong></h2>`
+
+//CONTRUCTOR OBJETOS PRESTAMOS
+function constructorPrestamo(montoSolicitado, cuotas){
+    
+    let tamanioHistorial = historial.length;
+    
+    this.id = tamanioHistorial + 1;
+    this.monto = montoSolicitado;
+    this.cuotas = cuotas;
+    this.interes = calcularInteres(montoSolicitado, calcularPorcentajeInteres(cuotas));
+    this.total = this.monto + this.interes;
+    this.pagoMensual = calcularPagoMensual(this.total, cuotas);
 };
+
+
+//GENEREADOR HTML
+function prestamoHTML(prestamo){
+    let resultadoImprimir = `
+    <div class="card-prestamo">
+        <div><h3 class=${estiloH3}>prestamo: <strong>${prestamo.id}</strong></h3></div>
+        <div><p>monto solicitado: ${prestamo.monto}</p></div>
+        <div><p>cuotas: ${prestamo.cuotas}</p></div>
+        <div><p>interes: ${prestamo.interes}</p></div>
+        <div><p>total a pagar: ${prestamo.total}</p></div>
+        <div><p>pago mensual: ${prestamo.pagoMensual}</p></div>
+    </div>`;
+    return resultadoImprimir;
+};
+
 
 //CREAR UN PRESTAMO
 function crearPrestamo(){
@@ -108,12 +108,17 @@ function crearPrestamo(){
 
     prestamo = new constructorPrestamo(monto, cuotas);
     
+    //HISTORIAL 
     historial.push(prestamo);
+    GuardarHistorialLocalStore();
 
     resultado.innerHTML = prestamoHTML(prestamo);
     
 };
-let historial = [];
+//HISTORIAL
+let historial = localStorage.getItem("historial");
+
+historial == undefined ? historial = []:historial = JSON.parse(historial)
 
 let resultado = document.getElementById("resultado");
 

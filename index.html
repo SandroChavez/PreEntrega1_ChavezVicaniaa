@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@800&display=swap" rel="stylesheet">
 
+    <!-- Librerias -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
+
     <title>PrestaFast || El sitio mas rapido de prestamos online</title>
 </head>
 <body>
@@ -44,7 +47,7 @@
 
                 <!-- Boton Crear Prestamo -->
                 <div class="boton">
-                    <button onclick="crearPrestamo(monto,cuotas)">Crear Prestamo</button>
+                    <button onclick="crearPrestamo()">Crear Prestamo</button>
                 </div>
 
                 <!-- Boton Mostrar Historial -->
@@ -54,7 +57,7 @@
 
                 <!-- Boton Eliminar Texto -->
                 <div class="boton">
-                    <button onclick="eliminarHistorial(resultado)">Eliminar Historial</button>
+                    <button onclick="eliminarHistorial()">Eliminar Historial</button>
                 </div>
 
                 <!-- Boton Eliminar Historial -->
@@ -71,6 +74,8 @@
             <h3 class="h2 centrar">Aqui se mostrara los resultados</h3>
         </div>
     </div>
+
+    <script src="luxon.js"></script>
 
     <script src="script.js"></script>
 </body>
