@@ -17,6 +17,12 @@ const GuardarHistorialLocalStore = () => localStorage.setItem("historial", JSON.
 //REINICIAR TEXTO
 const eliminarTexto = (texto) => texto.innerHTML = `<h2 class=${estiloH2}><strong>Se elimino el texto</strong></h2>`;
 
+//CONSEGUIR HISTORIAL
+function getHistorial(){
+    return new Promise (resolve =>{
+        resolve(localStorage.getItem("historial"))
+    })
+};
 
 //MOSTRAR HISTORIAL
 function mostrarHistorial (){
@@ -65,6 +71,7 @@ function constructorPrestamo(montoSolicitado, cuotas){
     this.interes = calcularInteres(montoSolicitado, calcularPorcentajeInteres(cuotas));
     this.total = this.monto + this.interes;
     this.pagoMensual = calcularPagoMensual(this.total, cuotas);
+    this.fecha = `${hoy.day}/${hoy.month}/${hoy.year}`;
 };
 
 
@@ -78,6 +85,7 @@ function prestamoHTML(prestamo){
         <div><p>interes: ${prestamo.interes}</p></div>
         <div><p>total a pagar: ${prestamo.total}</p></div>
         <div><p>pago mensual: ${prestamo.pagoMensual}</p></div>
+        <div><p>solicitado el: ${prestamo.fecha}</p></div>
     </div>`;
     return resultadoImprimir;
 };
@@ -115,13 +123,22 @@ function crearPrestamo(){
     resultado.innerHTML = prestamoHTML(prestamo);
     
 };
+
 //HISTORIAL
-let historial = localStorage.getItem("historial");
+let historial;
+getHistorial()
+    .then((conseguido) => {
+        historial = conseguido
+        historial == undefined ? historial = []:historial = JSON.parse(historial);
+    });
 
-historial == undefined ? historial = []:historial = JSON.parse(historial)
-
+//RESULTADO
 let resultado = document.getElementById("resultado");
 
 //ESTILOS
 let estiloH3 = "h3";
 let estiloH2 = "h2";
+
+//LUXON
+let dt = luxon.DateTime;
+let hoy = dt.now();
